@@ -1,0 +1,15 @@
+{
+    "dependencies": {
+        "@types/react": "^19.0.1",
+        "@types/react-dom": "^19.0.2",
+        "bootstrap": "^5.3.3",
+        "react": "^19.0.0",
+        "react-calendar": "^5.1.0",
+        "react-dom": "^19.0.0"
+    },
+    "devDependencies": {
+        "parcel": "^2.13.3",
+        "process": "^0.11.10",
+        "typescript": "^5.7.2"
+    }
+}
