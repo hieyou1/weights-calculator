@@ -5,7 +5,8 @@ import { CalSelector } from "./CalSelector";
 import { CalContainer } from "./CalContainer";
 import { PeriodSelector } from "./PeriodSelector";
 import { Grade } from "./Grade";
-import type { PeriodNum, Schedule } from "./types";
+import type { PeriodNum, Schedule, SelectionType } from "./types";
+import { genBlankSelected } from "./utils";
 
 const SCHED_AVAILABLE = {
     "SY2425 Semester 1": "sem1.json",
@@ -16,7 +17,6 @@ const SCHED_AVAILABLE = {
 export function App() {
     let [selectedCal, setSelectedCal] = useState('sem1.json');
     let [period, setPeriod] = useState<PeriodNum>("EB");
-    let [selected, setSelected] = useState({});
 
     let [cal, setCal] = useState(undefined);
     useEffect(() => {
@@ -34,6 +34,10 @@ export function App() {
             controller.abort();
         };
     }, [selectedCal]);
+
+    let [selected, setSelected] = useState<Record<string, SelectionType>>({});
+
+    if (cal && period && JSON.stringify(selected) == "{}") setSelected((_) => genBlankSelected(cal, period));
 
     return (<>
         <Header />
@@ -61,6 +65,7 @@ export function App() {
                     ...prevSelected,
                     [date]: selType
                 }));
+                console.log(JSON.stringify(selected));
             }}
             selected={selected}
         /> : <div>Loading...</div>}
