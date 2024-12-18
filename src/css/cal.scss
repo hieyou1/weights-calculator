@@ -1,0 +1,29 @@
+.cal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .calendar {
+        border: .5px solid black;
+        border-collapse: collapse;
+
+        .month-name {
+            text-align: center;
+            margin: 0;
+        }
+
+        table,
+        th,
+        td {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            width: 2em;
+            height: 2em;
+        }
+    }
+}
