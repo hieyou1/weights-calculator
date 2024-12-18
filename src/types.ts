@@ -5,3 +5,5 @@ export enum SelectionType {
     NoHR = 1,
     NotAttending = 2
 }
+
+export type Schedule = Record<string, PeriodNum[]>;

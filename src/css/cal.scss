@@ -1,9 +1,12 @@
 .cal-container {
+    font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 
     .calendar {
+        margin: 1%;
         border: .5px solid black;
         border-collapse: collapse;
 
@@ -21,7 +24,6 @@
         th,
         td {
             text-align: center;
-            font-family: 'Roboto', sans-serif;
             width: 2em;
             height: 2em;
         }
