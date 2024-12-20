@@ -16,7 +16,7 @@ function Day({ date: dateStr, inMonth, schedule, period, type = SelectionType.At
     } else {
         style.cursor = "pointer";
         style.userSelect = "none";
-        style.backgroundColor = (type == SelectionType.Attending) ? "lightblue" : ((type == SelectionType.NoHR ? "orange" : "beige"));
+        style.backgroundColor = (type == SelectionType.Attending) ? "lightblue" : ((type == SelectionType.NoHR ? "orange" : "white"));
     }
     return (<td style={style} onClick={(e) => {
         e.preventDefault();
@@ -116,5 +116,13 @@ export function CalContainer({ schedule, onUpdate, selected, period }: { schedul
 
     return (<div className="cal-container">
         {...months}
+        <table className="calendar legend">
+            <tbody>
+                <tr><th colSpan={2}><h3 className="month-name">Legend</h3></th></tr>
+                <tr><td><div className="square" style={{ backgroundColor: "lightblue" }}></div></td><td>Attending</td></tr>
+                <tr><td><div className="square" style={{ backgroundColor: "orange" }}></div></td><td>Attending, but no heart rate mins</td></tr>
+                <tr><td><div className="square" style={{ backgroundColor: "white" }}></div></td><td>Not attending (+ no heart rate)</td></tr>
+            </tbody>
+        </table>
     </div>);
 }

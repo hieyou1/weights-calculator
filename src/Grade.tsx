@@ -5,10 +5,10 @@ import "./css/grade.scss";
 import { PeriodNum, Schedule, SelectionType } from "./types";
 import { doesPdMeet, getScheduleStartEnd, pctToGrade } from "./utils";
 
-export function Grade({ schedule, period, selected }: { schedule: Schedule, period: PeriodNum, selected: Record<string, SelectionType> }) {
+export function Grade({ schedule, period, selected, makeups }: { schedule: Schedule, period: PeriodNum, selected: Record<string, SelectionType>, makeups: number }) {
     let totalAttendancePoints = 0;
     let totalHrPoints = 0;
-    let earnedAttendancePoints = 0;
+    let earnedAttendancePoints = makeups;
     let earnedHrPoints = 0;
     let { start, end } = getScheduleStartEnd(schedule);
     let curDate = start;

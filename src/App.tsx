@@ -5,7 +5,10 @@ import { CalSelector } from "./CalSelector";
 import { CalContainer } from "./CalContainer";
 import { PeriodSelector } from "./PeriodSelector";
 import { Grade } from "./Grade";
-import type { PeriodNum, Schedule, SelectionType } from "./types";
+import { Makeups } from "./Makeups";
+import { Disclaimer } from "./Disclaimer";
+
+import type { PeriodNum, SelectionType } from "./types";
 import { genBlankSelected } from "./utils";
 
 const SCHED_AVAILABLE = {
@@ -17,6 +20,7 @@ const SCHED_AVAILABLE = {
 export function App() {
     let [selectedCal, setSelectedCal] = useState('sem1.json');
     let [period, setPeriod] = useState<PeriodNum>("EB");
+    let [makeups, setMakeups] = useState(0);
 
     let [cal, setCal] = useState(undefined);
     useEffect(() => {
@@ -44,13 +48,15 @@ export function App() {
         {cal ? <><Grade
             schedule={cal}
             period={period}
-            selected={selected} /><br /></> : <></>}
+            selected={selected}
+            makeups={makeups} /><br /></> : <></>}
         <CalSelector
             label="Semester"
             calsAvailable={SCHED_AVAILABLE}
             defaultCal={selectedCal}
             onSelect={(cal) => setSelectedCal(cal)}
         />
+        <br />
         <PeriodSelector
             period={period}
             onChange={(period) => setPeriod(period)}
@@ -69,5 +75,11 @@ export function App() {
             }}
             selected={selected}
         /> : <div>Loading...</div>}
+        <br />
+        <Makeups
+            value={makeups}
+            onChange={setMakeups}></Makeups>
+        <br />
+        <Disclaimer />
     </>);
 }
