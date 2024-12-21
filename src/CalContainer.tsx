@@ -7,19 +7,25 @@ function Day({ date: dateStr, inMonth, schedule, period, type = SelectionType.At
     let date = new Date(dateStr);
     let [selType, setSelType] = useState(type);
     let style: React.CSSProperties = {};
+
+    let reactive = false;
+    style.userSelect = "none";
     if (!inMonth) {
         // style.display = "none";
         style.opacity = 0;
+        style.pointerEvents = "none";
     } else if (!doesPdMeet(schedule, period, date)) {
         style.backgroundColor = "lightgray";
         style.pointerEvents = "none";
     } else {
         style.cursor = "pointer";
-        style.userSelect = "none";
         style.backgroundColor = (type == SelectionType.Attending) ? "lightblue" : ((type == SelectionType.NoHR ? "orange" : "white"));
+        reactive = true;
     }
     return (<td style={style} onClick={(e) => {
         e.preventDefault();
+        if (!reactive) return;
+
         switch (selType) {
             case SelectionType.Attending: {
                 selType = SelectionType.NoHR;
@@ -35,7 +41,6 @@ function Day({ date: dateStr, inMonth, schedule, period, type = SelectionType.At
             }
         }
         setSelType(selType);
-        style.backgroundColor = (selType == SelectionType.Attending) ? "lightblue" : ((selType == SelectionType.NoHR ? "orange" : "beige"));
         onUpdate(date.toDateString(), selType);
     }}>{date.getDate()}</td>);
 }
